@@ -1,16 +1,26 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        // Courses table already exists in the database.
+        Schema::create('courses', function (Blueprint $table) {
+            $table->id();
+            $table->string('course_code')->unique();
+            $table->string('course_title');
+            $table->text('description')->nullable();
+            $table->string('instructor')->nullable();
+            $table->timestamps();
+        });
     }
 
     public function down(): void
     {
-        // Preserve the existing courses table and its data.
+        Schema::dropIfExists('courses');
     }
 };
